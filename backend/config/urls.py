@@ -31,5 +31,10 @@ urlpatterns = [
     path(
         "api/sessions/",
         include("sessions_app.urls")
-    )
+    ),
+
+    path(
+        "api/bookings/",
+        include("bookings.urls")
+    ),
 ]

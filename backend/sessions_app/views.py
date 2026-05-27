@@ -5,7 +5,20 @@ from rest_framework.permissions import (
 
 from .models import Session
 from .serializers import SessionSerializer
-from .permissions import IsCreator
+from .permissions import (
+    IsCreator,
+    IsSessionOwner
+)
+
+class MySessionsView(
+    generics.ListAPIView
+):
+    serializer_class = SessionSerializer
+
+    def get_queryset(self):
+        return Session.objects.filter(
+            creator=self.request.user
+        )
 
 
 class SessionListCreateView(
@@ -21,7 +34,10 @@ class SessionListCreateView(
 
         return [IsAuthenticatedOrReadOnly()]
 
-    def perform_create(self, serializer):
+    def perform_create(
+        self,
+        serializer
+    ):
         serializer.save(
             creator=self.request.user
         )
@@ -40,6 +56,9 @@ class SessionDetailView(
             "PATCH",
             "DELETE"
         ]:
-            return [IsCreator()]
+            return [
+                IsCreator(),
+                IsSessionOwner()
+            ]
 
         return [IsAuthenticatedOrReadOnly()]
