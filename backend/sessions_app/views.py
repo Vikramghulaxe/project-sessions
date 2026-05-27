@@ -2,18 +2,20 @@ from rest_framework import generics
 from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly
 )
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Session
 from .serializers import SessionSerializer
 from .permissions import (
     IsCreator,
-    IsSessionOwner
+    IsSessionOwner    
 )
 
 class MySessionsView(
     generics.ListAPIView
 ):
     serializer_class = SessionSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return Session.objects.filter(
