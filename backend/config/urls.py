@@ -27,4 +27,9 @@ urlpatterns = [
         "api/auth/",
         include("users.urls")
     ),
+
+    path(
+        "api/sessions/",
+        include("sessions_app.urls")
+    )
 ]
