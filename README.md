@@ -134,6 +134,18 @@ VITE_GOOGLE_CLIENT_ID=your_google_client_id
 
 ---
 
+## Demo Accounts
+
+### Creator
+Username: creator_demo
+Password: Password123
+
+### User
+Username: user_demo
+Password: Password123
+
+---
+
 # Google OAuth Setup
 
 ## Create OAuth Credentials
