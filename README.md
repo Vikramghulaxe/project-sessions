@@ -250,7 +250,29 @@ VITE_GOOGLE_CLIENT_ID=
 
 # Screenshots
 
-(Add screenshots here before submission)
+### Home Page
+![Home](./screenshots/home.png)
+
+### Login Page
+![Login Page](./screenshots/login.png)
+
+### Register Page
+![Register Page](./screenshots/profile.png)
+
+### Profile Page
+![Profile Page](./screenshots/profile.png)
+
+### Bookings Dashboard
+![Bookings Dashboard](./screenshots/bookings.png)
+
+### Creator Profile
+![Creator Profile](./screenshots/creator-profile.png)
+
+### Creator Dashboard
+![Creator Dashboard](./screenshots/creator-dashboard.png)
+
+### Creator Session
+![Creator Session](./screenshots/creator-session.png)
 
 ---
 
