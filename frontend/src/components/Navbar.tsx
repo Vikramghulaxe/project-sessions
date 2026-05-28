@@ -51,7 +51,7 @@ export default function Navbar() {
             </button>
           ) : (
             <div className="flex item-center gap-3">
-              <Link to="/login" className="text-indigo-600 pt-[6px]">
+              <Link to="/login" className="text-indigo-600 pt-[8px]">
                 Login
               </Link>
 
