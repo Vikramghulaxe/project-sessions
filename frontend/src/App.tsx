@@ -14,6 +14,7 @@ import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import CreateSession from "./pages/CreateSession";
 import EditSession from "./pages/EditSession";
+import Profile from "./pages/Profile";
 
 function App() {
   const { loading } = useContext(AuthContext);
@@ -65,6 +66,15 @@ function App() {
           element={
             <ProtectedRoute>
               <EditSession />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
             </ProtectedRoute>
           }
         />
