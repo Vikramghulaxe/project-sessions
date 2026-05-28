@@ -2,7 +2,8 @@ from django.urls import path
 from .views import (
     GoogleLoginView,
     RegisterView,
-    ProfileView
+    ProfileView,
+    UpdateProfileView
 )
 
 from rest_framework_simplejwt.views import (
@@ -29,6 +30,11 @@ urlpatterns = [
     path(
         "profile/",
         ProfileView.as_view()
+    ),
+
+    path(
+        "profile/update/",
+        UpdateProfileView.as_view()
     ),
 
     path(

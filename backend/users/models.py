@@ -14,7 +14,11 @@ class User(AbstractUser):
         default="USER"
     )
 
-    avatar = models.URLField(blank=True, null=True)
+    avatar = models.ImageField(
+        upload_to="avatars/",
+        null=True,
+        blank=True
+    )
 
     def __str__(self):
         return self.username

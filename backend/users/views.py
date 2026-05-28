@@ -7,15 +7,18 @@ from .serializers import (
     RegisterSerializer
 )
 
-
-
 from google.oauth2 import id_token
 from google.auth.transport import requests
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
 from rest_framework_simplejwt.tokens import RefreshToken
+
+from rest_framework.parsers import (
+    MultiPartParser,
+    FormParser
+)
+from rest_framework.permissions import IsAuthenticated
 
 
 class RegisterView(generics.CreateAPIView):
@@ -28,22 +31,32 @@ class ProfileView(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
-    
 
 
+class UpdateProfileView(
+        generics.UpdateAPIView
+    ):
+
+        serializer_class = UserSerializer
+        permission_classes = [
+            IsAuthenticated
+        ]
+
+        parser_classes = [
+            MultiPartParser,
+            FormParser
+        ]
+
+        def get_object(self):
+            return self.request.user
 
 class GoogleLoginView(APIView):
 
     def post(self, request):
-
         try:
-
             token = request.data.get(
                 "token"
             )
-
-            print("TOKEN:", token)
-
             info = id_token.verify_oauth2_token(
                 token,
                 requests.Request(),
@@ -51,11 +64,7 @@ class GoogleLoginView(APIView):
                     "GOOGLE_CLIENT_ID"
                 )
             )
-
-            print("INFO:", info)
-
             email = info["email"]
-
             user, created = User.objects.get_or_create(
                 email=email,
                 defaults={
@@ -63,25 +72,17 @@ class GoogleLoginView(APIView):
                     email.split("@")[0]
                 }
             )
-
             refresh = RefreshToken.for_user(
                 user
             )
-
             return Response({
-
                 "access":
                 str(refresh.access_token),
-
                 "refresh":
                 str(refresh)
-
             })
-
         except Exception as e:
-
             print("GOOGLE ERROR:", str(e))
-
             return Response(
                 {
                     "error":
