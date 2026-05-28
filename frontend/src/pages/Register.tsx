@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import toast from "react-hot-toast";
 
-
 export default function Register() {
   const navigate = useNavigate();
 
@@ -27,18 +26,66 @@ export default function Register() {
   };
 
   const register = async () => {
+    if (!formData.username.trim()) {
+      toast.error("Username is required");
+
+      return;
+    }
+
+    if (formData.username.length < 3) {
+      toast.error("Username must be at least 3 characters");
+
+      return;
+    }
+
+    const emailRegex = /^\S+@\S+\.\S+$/;
+
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Enter a valid email");
+
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      toast.error("Password must be at least 6 characters");
+
+      return;
+    }
+
+    if (!/[A-Z]/.test(formData.password)) {
+      toast.error("Password must contain at least one uppercase letter");
+
+      return;
+    }
+
+    if (!/[0-9]/.test(formData.password)) {
+      toast.error("Password must contain at least one number");
+
+      return;
+    }
+
     try {
       setLoading(true);
 
-      await api.post("auth/register/", formData);
+      await api.post("auth/register/", {
+        ...formData,
+        username: formData.username.trim(),
+        email: formData.email.trim(),
+      });
 
       toast.success("Registration successful");
 
       navigate("/login");
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
 
-      toast.error("Registration failed");
+      if (error?.response?.data?.username) {
+        toast.error(error.response.data.username[0]);
+      } else if (error?.response?.data?.email) {
+        toast.error(error.response.data.email[0]);
+      } else {
+        toast.error("Registration failed");
+      }
     } finally {
       setLoading(false);
     }
@@ -57,6 +104,7 @@ export default function Register() {
           <input
             name="username"
             placeholder="Username"
+            minLength={3}
             value={formData.username}
             onChange={handleChange}
             className="w-full border border-slate-300 rounded-lg px-4 py-3 outline-none focus:border-indigo-500"
@@ -64,6 +112,7 @@ export default function Register() {
 
           <input
             name="email"
+            type="email"
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
@@ -73,6 +122,7 @@ export default function Register() {
           <input
             name="password"
             type="password"
+            minLength={6}
             placeholder="Password"
             value={formData.password}
             onChange={handleChange}
