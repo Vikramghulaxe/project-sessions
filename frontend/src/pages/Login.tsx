@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import api from "../api/axios";
 import { AuthContext } from "../context/AuthContext";
+import { GoogleLogin } from "@react-oauth/google";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -60,6 +61,42 @@ export default function Login() {
       />
 
       <button onClick={login}>Login</button>
+
+      <GoogleLogin
+      onSuccess={async (
+        credentialResponse
+      ) => {
+
+        try {
+
+          const response =
+            await api.post(
+              "auth/google/",
+              {
+                token:
+                  credentialResponse.credential
+              }
+            );
+
+          localStorage.setItem(
+            "token",
+            response.data.access
+          );
+
+          window.location.href = "/";
+
+        } catch (error) {
+
+          console.log(error);
+
+          alert(
+            "Google login failed"
+          );
+
+        }
+
+      }}
+    />
 
       <p>
         Don't have an account?

@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import (
+    GoogleLoginView,
     RegisterView,
     ProfileView
 )
@@ -28,5 +29,10 @@ urlpatterns = [
     path(
         "profile/",
         ProfileView.as_view()
+    ),
+
+    path(
+        "google/",
+        GoogleLoginView.as_view()
     ),
 ]
