@@ -13,12 +13,14 @@ class BookingSerializer(serializers.ModelSerializer):
         read_only=True
     )
 
+    session_date = serializers.CharField(
+        source="session.date",
+        read_only=True
+    )
+
     class Meta:
         model = Booking
-        fields = [
-            "id",
-            "session",
-            "session_title",
-            "creator_name",
-            "created_at"
+        fields = "__all__"
+        read_only_fields = [
+            "user"
         ]
