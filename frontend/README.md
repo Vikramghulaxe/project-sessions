@@ -1,16 +1,77 @@
-# React + Vite
+# Frontend - Ocean Sessions Marketplace
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend application built with React, TypeScript, and Tailwind CSS.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+# Features
 
-## React Compiler
+* Google OAuth login
+* JWT authentication
+* Responsive UI
+* Tailwind CSS
+* Session browsing
+* Booking dashboard
+* Creator dashboard
+* Profile management
+* Avatar upload
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+# Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* React
+* TypeScript
+* Tailwind CSS
+* Axios
+* React Router
+* React Hot Toast
+
+---
+
+# Run Frontend
+
+## Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+## Start Development Server
+
+```bash
+npm run dev
+```
+
+---
+
+# Environment Variables
+
+Create:
+
+```bash
+.env
+```
+
+Add:
+
+```env
+VITE_GOOGLE_CLIENT_ID=
+```
+
+---
+
+# Frontend Structure
+
+```bash
+src/
+├── api/
+├── components/
+├── context/
+├── pages/
+├── routes/
+├── types/
+└── main.tsx
+```
